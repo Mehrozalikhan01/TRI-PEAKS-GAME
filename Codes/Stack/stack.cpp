@@ -1,74 +1,111 @@
 #include <iostream>
-#include <string>
-#include <cstdlib>
 #include <ctime>
+#include <cstdlib>
 using namespace std;
-class Card
-{
+
+class Card {
 public:
-    int rank;
     string suit;
-    Card(int r = 0, string s = "")
-    {
+    string rank;
+
+    Card() { suit = ""; rank = ""; }
+
+    Card(string s, string r) {
         suit = s;
         rank = r;
     }
-    void Display()
-    {
-        cout << rank << suit << " ";
+
+    void display() {
+        cout << "[" << rank << suit << "]";
     }
 };
 
-class Deck
-{
+class TriPeaksDisplay {
 public:
-    Card cards[52];
-    Deck()
-    {
+    Card deck[52];
+    Card tableau[28];
+
+    TriPeaksDisplay() {
+        createDeck();
+        shuffleDeck();
+        dealTriPeaks();
+    }
+
+    void createDeck() {
         string suits[4] = { "H", "D", "C", "S" };
-        int k = 0;
-        for (int i = 0; i < 4; i++)
-        {
-            for (int j = 1; j <= 13; j++)
-            {
-                cards[k] = Card(j, suits[i]);
-                k++;
+        string ranks[13] = { "A","2","3","4","5","6","7","8","9","10","J","Q","K" };
+
+        int index = 0;
+        for (int s = 0; s < 4; s++) {
+            for (int r = 0; r < 13; r++) {
+                deck[index] = Card(suits[s], ranks[r]);
+                index++;
             }
         }
     }
 
-
-    void shuffle()
-    {
-        srand(time(0));
-        for (int i = 51; i > 0; i--)
-        {
-            int j = rand() % (i + 1);
-            Card temp = cards[i];
-            cards[i] = cards[j];
-            cards[j] = temp;
+    void shuffleDeck() {
+        srand((unsigned)time(0));
+        for (int i = 0; i < 52; i++) {
+            int r = rand() % 52;
+            Card temp = deck[i];
+            deck[i] = deck[r];
+            deck[r] = temp;
         }
     }
 
-    void displayDeck()
-    {
-        for (int i = 0; i < 52; i++)
-        {
-            cards[i].Display();
-            if (i % 13 == 12)
-                cout << endl;
+    void dealTriPeaks() {
+        for (int i = 0; i < 28; i++) {
+            tableau[i] = deck[i];
         }
+    }
+
+    void showCard(int i) {
+        tableau[i].display();
+    }
+
+    
+    void displayLayout() {
+        cout << "\n=========== TRI-PEAKS Game ===========\n\n";
+
+        cout << "              ";
+        showCard(0);
+        cout << "          ";
+        showCard(1);
+        cout << "           ";
+        showCard(2);
+        cout << "\n\n";
+
+        cout << "           ";
+        for (int i = 3; i <= 8; i++) {
+            if (i == 5 || i == 7)
+                cout << "     ";
+            showCard(i);
+            cout << " ";
+        }
+        cout << "\n\n";
+
+        cout << "         ";
+        for (int i = 9; i <= 17; i++) {
+            showCard(i);
+            cout << " ";
+        }
+        cout << "\n\n    ";
+
+        for (int i = 18; i <= 27; i++) {
+            showCard(i);
+            cout << " ";
+        }
+        cout << "\n\n";
+
+        cout << "==============================================\n\n";
     }
 };
-int main()
-{
-    Deck d;
 
-    cout << "Cards in the Dack:\n" << endl;
-    d.displayDeck();
+int main() {
+    TriPeaksDisplay game;
 
-    d.shuffle();
-    cout << "\nCards in the Deck After Shuffle:\n"<<endl;
-    d.displayDeck();
+    game.displayLayout();
+
     return 0;
 }
