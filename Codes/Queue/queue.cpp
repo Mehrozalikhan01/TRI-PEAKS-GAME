@@ -19,7 +19,7 @@ void enqueue(t data){
 ptr[++fron]=data;
 }
 t dequeue(){
-    return ptr[rear];
+    return ptr[rear++];
 }
 t front(){   
     return ptr[rear];
@@ -64,60 +64,99 @@ for(int i=1;i<=13;i++){
 }
 
 void display(queue<int> &q1,queue<int> &q2,queue<int> &q3,queue<int> &q4,queue<int> &q5,queue<int> &q6,queue<int> &q7,queue<int> &q8,queue<int> &q9,queue<int> &q10,queue<int> &q11){
-if(q1.fron - q1.rear > 0){
+if((q1.rear > q2.rear)&&(q2.rear==q2.fron)){
+cout<<"     ";q1.card();
+}else if(q1.rear<=3 ){
     cout<<"     "<<"*";
 }
-if(q4.fron - q4.rear > 0){
+if((q4.rear > q5.rear)&&(q5.rear==q5.fron)){
+cout<<"     ";q4.card();
+}else if(q4.rear<=3){
     cout<<"     "<<"*";
 }
-if(q7.fron - q7.rear > 0){
+if((q7.rear > q8.rear)&&(q8.rear==q8.fron)){
+cout<<"     ";q7.card();cout<<endl;
+}else if(q7.rear<=3){
     cout<<"     "<<"*"<<endl;
 }
-if(q1.fron - q1.rear > 0){
+//line 2
+if(q1.rear==2 && q2.rear==2){
+ cout<<"    ";q1.card();
+}else if(q1.rear<=2){
     cout<<"    "<<"*";
 }
-if(q2.fron - q2.rear > 0){
+if(q2.rear==2 && q3.rear==2){
+ cout<<" ";q2.card();
+}else if(q2.rear<=2){
     cout<<" *";
 }
-if(q4.fron - q4.rear > 0){
+if(q4.rear==2 && q5.rear==2){
+ cout<<"   ";q4.card();
+}else if(q4.rear<=2){
     cout<<"   "<<"*";
 }
-if(q5.fron - q5.rear > 0){
+if(q5.rear==2 && q6.rear==2){
+ cout<<" ";q5.card();
+}else if(q5.rear<=2){
     cout<<" *";
 }
-if(q7.fron - q7.rear > 0){
+if(q7.rear==2 && q8.rear==2){
+ cout<<"   ";q7.card();
+}else if(q7.rear<=2){
     cout<<"   "<<"*";
 }
-if(q8.fron - q8.rear > 0){
+if(q8.rear==2 && q9.rear==2){
+ cout<<" ";q8.card();cout<<endl;
+}else if(q8.rear<=2){
     cout<<" *"<<endl;
 }
-if(q1.fron - q1.rear > 0){
+//line 3
+if(q1.rear==1 && q2.rear==1){
+cout<<"   ";q1.card();
+}else if(q1.rear<=1){
     cout<<"   "<<"*";
 }
-if(q2.fron - q2.rear > 0){
+if(q2.rear==1 && q3.rear==1){
+cout<<" ";q2.card();
+}else if(q2.rear<=1){
     cout<<" "<<"*";
 }
-if(q3.fron - q3.rear > 0){
+if(q3.rear==1 && q4.rear==1){
+cout<<" ";q3.card();
+}else if(q3.rear<=1){
     cout<<" "<<"*";
 }
-if(q4.fron - q4.rear > 0){
+if(q4.rear==1 && q5.rear==1){
+cout<<" ";q4.card();
+}else if(q4.rear<=1){
     cout<<" "<<"*";
 }
-if(q5.fron - q5.rear > 0){
+if(q5.rear==1 && q6.rear==1){
+cout<<" ";q5.card();
+}else if(q5.rear<=1){
     cout<<" "<<"*";
 }
-if(q6.fron - q6.rear > 0){
+if(q6.rear==1 && q7.rear==1){
+cout<<" ";q6.card();
+}else if(q6.rear<=1){
     cout<<" "<<"*";
 }
-if(q7.fron - q7.rear > 0){
+if(q7.rear==1 && q8.rear==1){
+cout<<" ";q7.card();
+}else if(q7.rear<=1){
     cout<<" "<<"*";
 }
-if(q8.fron - q8.rear > 0){
+if(q8.rear==1 && q9.rear==1){
+cout<<" ";q8.card();
+}else if(q8.rear<=1){
     cout<<" "<<"*";
 }
-if(q9.fron - q9.rear > 0){
+if(q9.rear==1 && q10.rear==1){
+cout<<" ";q9.card();cout<<endl;
+}else if(q9.rear<=1){
     cout<<" "<<"*"<<endl;
 }
+//line 4
 if(q1.rear == 0){
     cout<<"  "; q1.card(); 
 }
@@ -151,6 +190,9 @@ if(q10.rear == 0){
     q10.card();
     cout<<endl;
 }
+//stock
+
+cout<<endl<<" ";q11.card();cout<<" *"<<endl;
 
 
 
