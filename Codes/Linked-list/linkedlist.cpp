@@ -98,9 +98,57 @@ public:
         cout<<endl;
     }
 
-    void peaks() {
+   /* void peaks() {
 
+    }*/
+
+
+int get_card(string card) {
+    if (card[1] == 'A')
+{
+       return 1;
     }
+
+    if (card[1] == 'J')
+  {
+        return 11;
+    }
+    if (card[1] == 'Q')
+      {
+        return 12;
+}
+    if (card[1] == 'K')
+       {
+        return 13;
+   }
+    if (card.length() == 3)
+ {
+
+         return 10;
+    }
+
+
+    return card[1] - '0';
+}
+
+
+
+void Peaks(string arr[])
+  {
+    int index = 24;
+
+    for (int i = 0; i < 28; i++)
+    {
+    peaksLL.insertAtEnd(arr[index]);
+revealed[i] = false;
+  index++;
+}
+    for (int i = 18; i < 28; i++)
+ {
+       revealed[i] = true;
+    }
+
+ }
 
 };
 
@@ -120,4 +168,8 @@ void start() {
 
 int main() {
     start();
+
+
+
+
 }
