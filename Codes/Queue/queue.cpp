@@ -43,9 +43,10 @@ switch(front()){
     }
 }
 friend void functioning(queue<int> &q1,queue<int> &q2,queue<int> &q3,queue<int> &q4,queue<int> &q5,queue<int> &q6,queue<int> &q7,queue<int> &q8,queue<int> &q9,queue<int> &q10,queue<int> &q11);
+
 };
 
-void inputing(queue<int> &q1,queue<int> &q2,queue<int> &q3,queue<int> &q4,queue<int> &q5,queue<int> &q6,queue<int> &q7,queue<int> &q8,queue<int> &q9,queue<int> &q10,queue<int> &q11){
+void filling(queue<int> &q1,queue<int> &q2,queue<int> &q3,queue<int> &q4,queue<int> &q5,queue<int> &q6,queue<int> &q7,queue<int> &q8,queue<int> &q9,queue<int> &q10,queue<int> &q11){
     q1.enqueue(7);q1.enqueue(7);q1.enqueue(8);q1.enqueue(9);
 q2.enqueue(8);q2.enqueue(6);q2.enqueue(10);
 q3.enqueue(9);q3.enqueue(11);
@@ -194,12 +195,60 @@ if(q10.rear == 0){
 
 cout<<endl<<" ";q11.card();cout<<" *"<<endl;
 
-
+}
+void update(queue<int> &q11,queue<int> &q){
+    int cnt=0;
+    int array[52];
+do{
+   array[cnt++]=q11.dequeue();
+}while(q11.rear != q11.fron);
+q11.rear=0;q11.fron=-1;
+q11.enqueue(q.dequeue());
+for(int i=0;i<cnt;i++){
+    q11.enqueue(array[i]);
+}
 
 }
+
+void incstock(int num,queue<int> &q1,queue<int> &q2,queue<int> &q3,queue<int> &q4,queue<int> &q5,queue<int> &q6,queue<int> &q7,queue<int> &q8,queue<int> &q9,queue<int> &q10,queue<int> &q11){
+if(q1.front()==num){
+    update(q11,q1);}
+   else if(q2.front()==num){
+    update(q11,q2);}
+    else if(q3.front()==num){
+    update(q11,q3);}
+    else if(q4.front()==num){
+   update(q11,q4);}
+    else if(q5.front()==num){
+    update(q11,q5);}
+    else if(q6.front()==num){
+    update(q11,q6);}
+    else if(q7.front()==num){
+    update(q11,q7);}
+    else if(q8.front()==num){
+    update(q11,q8);}
+    else if(q9.front()==num){
+    update(q11,q9);}
+    else if(q10.front()==num){
+   update(q11,q10);}
+}
+void inputing(queue<int> &q1,queue<int> &q2,queue<int> &q3,queue<int> &q4,queue<int> &q5,queue<int> &q6,queue<int> &q7,queue<int> &q8,queue<int> &q9,queue<int> &q10,queue<int> &q11){
+    int num;
+    cout<<"Enter the card number which you want to add to stock :";
+    cin>>num;
+    if(num-1 == q11.front() || num+1 == q11.front() || (num==1 && q11.front()==13)||(num==13 && q11.front()==1)){
+incstock(num,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11);
+    }
+    else{
+        cout<<"This card cant be addon the stack \n";
+    }
+}
  void functioning(queue<int> &q1,queue<int> &q2,queue<int> &q3,queue<int> &q4,queue<int> &q5,queue<int> &q6,queue<int> &q7,queue<int> &q8,queue<int> &q9,queue<int> &q10,queue<int> &q11){
-    inputing(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11);
+    filling(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11);
+    for(int i=1;i<=12;i++){
     display(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11);
+    inputing(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11);}
+
  }
 int main(){
 queue<int> q1(4);
@@ -212,7 +261,7 @@ queue<int> q7(4);
 queue<int> q8(3);
 queue<int> q9(2);
 queue<int> q10(1);
-queue<int> q11(24);
+queue<int> q11(52);
 functioning(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11);
 
 
