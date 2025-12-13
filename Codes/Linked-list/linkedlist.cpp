@@ -1,35 +1,38 @@
 #include <iostream>
+#include <string>
 #include <cstdlib>
+#include <ctime>
+
 using namespace std;
-template<typename T>
+
 class node {
 public:
-    T data;
-    node<T> *next;
+    string data;
+    node *next;
 
-    node(T value) {
+    node(string value) {
         data = value;
         next = nullptr;
     }
 };
-template<typename T>
+
 class linkedList {
 public:
-    node<T> *head;
+    node *head;
 
     linkedList() {
         head = nullptr;
     }
 
-    void insertAtBeginning(T value) {
-        node<T> *newNode = new node<T>(value);
+    void insertAtBeginning(string value) {
+        node *newNode = new node(value);
         newNode->next = head;
         head = newNode;
     }
 
-    void insertAtEnd(T value) {
-        node<T> *temp = head;
-        node<T> *newNode = new node<T>(value);
+    void insertAtEnd(string value) {
+        node *temp = head;
+        node *newNode = new node(value);
         if (temp == nullptr) {
             head = newNode;
             return;
@@ -40,10 +43,17 @@ public:
         temp->next = newNode;
     }
 
-    void insertAfterValue(T target, T value) {
-        node<T>* newNode=new node<T>(value);
-        node<T>* current=head;
+    void insertAfterValue(string target, string value) {
+
+        node* newNode=new node(value);
+
+        if (head == nullptr) {
+            cout << "List is empty\n";
+            return;
+        }
+        node* current=head;
         while (current->data!=target) {
+
             if (current->next==nullptr) {
                 cout<<"Value does not exist! "<<endl;
                 return;
@@ -55,24 +65,26 @@ public:
     }
 
     void display() {
-        node<T> *current = head;
+        node* current = head;
         while (current != nullptr) {
             cout << current->data << " ";
             current = current->next;
         }
     }
 };
-template <typename T>
+
 class game {
 public:
-    T cards[52] = {
+    linkedList peaksLL;
+    bool revealed[28];
+    string cards[52] = {
     "SA","S2","S3","S4","S5","S6","S7","S8","S9","S10","SJ","SQ","SK",
     "HA","H2","H3","H4","H5","H6","H7","H8","H9","H10","HJ","HQ","HK",
     "DA","D2","D3","D4","D5","D6","D7","D8","D9","D10","DJ","DQ","DK",
     "CA","C2","C3","C4","C5","C6","C7","C8","C9","C10","CJ","CQ","CK"
      };
-    linkedList<string> stack1;
-    linkedList<string> stack2;
+    linkedList stack1;
+    linkedList stack2;
     void shuffleArray(string arr[]) {
         for (int i = 52 - 1; i > 0; i--) {
             int j = rand() % (i + 1);
@@ -98,14 +110,57 @@ public:
         cout<<endl;
     }
 
-    void peaks() {
+    int get_card(string card) {
+        if (card[1] == 'A')
+        {
+            return 1;
+        }
+
+        if (card[1] == 'J')
+        {
+            return 11;
+        }
+        if (card[1] == 'Q')
+        {
+            return 12;
+        }
+        if (card[1] == 'K')
+        {
+            return 13;
+        }
+        if (card.length() == 3)
+        {
+
+            return 10;
+        }
+
+
+        return card[1] - '0';
+    }
+
+
+
+    void Peaks(string arr[])
+    {
+        int index = 24;
+
+        for (int i = 0; i < 28; i++)
+        {
+            peaksLL.insertAtEnd(arr[index]);
+            revealed[i] = false;
+            index++;
+        }
+        for (int i = 18; i < 28; i++)
+        {
+            revealed[i] = true;
+        }
 
     }
 
 };
 
 void start() {
-    game<string> Tripeaks;
+    game Tripeaks;
     int randomTimes = rand() %1000;
     for (int i=0;i<=randomTimes;i++) {
         Tripeaks.shuffleArray(Tripeaks.cards);
@@ -115,9 +170,10 @@ void start() {
     Tripeaks.makeStack2(Tripeaks.cards);
     Tripeaks.displayStack1();
     Tripeaks.displayStack2();
-    Tripeaks.peaks();
+    Tripeaks.Peaks(Tripeaks.cards);
 }
 
 int main() {
     start();
+    return 0;
 }
