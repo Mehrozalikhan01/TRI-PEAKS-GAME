@@ -24,6 +24,8 @@ class TriPeaksDisplay {
 public:
     Card deck[52];
     Card tableau[28];
+     bool removed[28];
+     bool faceUp[28];
 
     TriPeaksDisplay() {
         createDeck();
@@ -57,6 +59,7 @@ public:
     void dealTriPeaks() {
         for (int i = 0; i < 28; i++) {
             tableau[i] = deck[i];
+            removed[i] = false;
         }
     }
 
