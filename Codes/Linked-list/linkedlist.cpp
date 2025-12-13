@@ -156,6 +156,50 @@ public:
         }
 
     }
+    bool canreveal(string Peaks)
+    {
+        string topcard=stack2.head->data;
+        if (stack2.head==nullptr)
+        {
+            return false;
+        }
+        int c1=get_card(Peaks);
+        int c2=get_card(topcard);
+        //game rule if value of card is +1,-1 it can be revealed
+        if (c1 == c2-1 || c1 == c2+1)
+        {
+            return true;
+        }
+        return false;
+    }
+    bool removepeak(string cards)
+    {
+        if (peaksLL.head==nullptr)
+        {
+            return false;
+        }
+        node* temp=peaksLL.head;
+        node* prev= nullptr;
+        while (temp!=nullptr)
+        {
+            if (temp->data==cards && canreveal(cards))
+            {
+                prev->next=temp->next;
+                if (prev==nullptr)
+                {
+                    peaksLL.head=temp->next;
+                }
+                stack2.insertAtBeginning(temp->data);
+                return true;
+            }
+            else
+                {
+                    return false;
+                    }
+                prev=temp;
+                temp=temp->next;
+        }
+    }
 
 };
 
