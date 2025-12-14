@@ -62,6 +62,24 @@ public:
             removed[i] = false;
         }
     }
+   void initializeFaceUp() {
+        for (int i = 0; i < 28; i++)
+        {
+            faceUp[i] = false;
+        }
+
+        for (int i = 18; i <= 27; i++)
+        {
+             faceUp[i] = true;
+        }
+           
+
+       /*if (!stock.isEmpty())
+       {
+           waste.push(stock.pop());
+       }      
+        updateFaceUpAll(); */
+    }
 
     void showCard(int i) {
         tableau[i].display();
