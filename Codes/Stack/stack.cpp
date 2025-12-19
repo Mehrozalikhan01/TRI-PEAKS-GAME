@@ -74,18 +74,28 @@ public:
         }
            
 
-       /*if (!stock.isEmpty())
+       if (!stock.isEmpty())
        {
            waste.push(stock.pop());
        }      
-        updateFaceUpAll(); */
+        updateFaceUpAll(); 
     }
-
-    void showCard(int i) {
-        tableau[i].display();
+    void showCard(int i)
+    {
+        if (removed[i])
+         {
+             cout << "   "; return; 
+         }
+        if (faceUp[i]) 
+        {
+            tableau[i].display();
+        }
+        else 
+        {
+            cout << "[*]";
+        }
     }
-
-    
+        
     void displayLayout() {
         cout << "\n=========== TRI-PEAKS Game ===========\n\n";
 
