@@ -62,6 +62,36 @@ public:
         }
     }
 };
+
+int get_card(string card)
+{
+    string value = card.substr(1);
+
+    if (value == "A")
+{
+    
+    return 1;
+
+    }
+
+    if (value == "J")
+    {
+        
+        return 11;
+    }
+    if (value == "Q")
+    {
+return 12;
+
+    }
+    if (value == "K")
+
+    {
+return 13;
+    }
+    return stoi(value);
+}
+
 template <typename T>
 class game {
 public:
@@ -103,7 +133,7 @@ public:
     }*/
 
 
-int get_card(string card) {
+/*int get_card(string card) {
     if (card[1] == 'A')
 {
        return 1;
@@ -131,24 +161,62 @@ int get_card(string card) {
     return card[1] - '0';
 }
 
+*/
 
+void peaks(string arr[]) {
+    int index = 24; 
 
-void Peaks(string arr[])
-  {
-    int index = 24;
-
-    for (int i = 0; i < 28; i++)
-    {
-    peaksLL.insertAtEnd(arr[index]);
-revealed[i] = false;
-  index++;
-}
-    for (int i = 18; i < 28; i++)
- {
-       revealed[i] = true;
+    for (int i = 0; i < 28; i++) 
+    
+      {
+ peaksLL.insertAtEnd(arr[index]); 
+     revealed[i] = false;             
+index++;
     }
 
- }
+    
+    for (int i = 18; i < 28; i++) 
+    
+      {
+        revealed[i] = true;
+    }
+}
+
+
+
+ bool canreveal(string Peaks)
+{
+    if (stack2.head == nullptr)
+        return false;
+
+    string topcard = stack2.head->data;
+
+    int c1 = get_card(Peaks);
+    int c2 = get_card(topcard);
+
+    if (c1 == c2 - 1 || c1 == c2 + 1)
+        return true;
+
+    return false;
+}
+
+void displayPeaks() 
+ {
+    node<string>* current = peaksLL.head;
+    int i = 0;
+    while (current != nullptr)
+    
+    {
+if (revealed[i])
+ cout << current->data << " ";
+        else
+    cout << "* ";
+        current = current->next;
+        i++;
+    }
+    cout << endl;
+}
+
 
 };
 
