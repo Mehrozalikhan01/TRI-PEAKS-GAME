@@ -24,6 +24,8 @@ class TriPeaksDisplay {
 public:
     Card deck[52];
     Card tableau[28];
+     bool removed[28];
+     bool faceUp[28];
 
     TriPeaksDisplay() {
         createDeck();
@@ -57,14 +59,43 @@ public:
     void dealTriPeaks() {
         for (int i = 0; i < 28; i++) {
             tableau[i] = deck[i];
+            removed[i] = false;
         }
     }
+   void initializeFaceUp() {
+        for (int i = 0; i < 28; i++)
+        {
+            faceUp[i] = false;
+        }
 
-    void showCard(int i) {
-        tableau[i].display();
+        for (int i = 18; i <= 27; i++)
+        {
+             faceUp[i] = true;
+        }
+           
+
+       if (!stock.isEmpty())
+       {
+           waste.push(stock.pop());
+       }      
+        updateFaceUpAll(); 
     }
-
-    
+    void showCard(int i)
+    {
+        if (removed[i])
+         {
+             cout << "   "; return; 
+         }
+        if (faceUp[i]) 
+        {
+            tableau[i].display();
+        }
+        else 
+        {
+            cout << "[*]";
+        }
+    }
+        
     void displayLayout() {
         cout << "\n=========== TRI-PEAKS Game ===========\n\n";
 
