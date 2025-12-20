@@ -1,25 +1,21 @@
 #include <iostream>
-#include <string>
-#include <cstdlib>
 #include <ctime>
-
 using namespace std;
-
 class node {
 public:
     string data;
     node *next;
-
+    bool revealed;
+    bool removed;
     node(string value) {
         data = value;
         next = nullptr;
+        revealed=false;
     }
 };
-
 class linkedList {
 public:
     node *head;
-
     linkedList() {
         head = nullptr;
     }
@@ -44,7 +40,6 @@ public:
     }
 
     void insertAfterValue(string target, string value) {
-
         node* newNode=new node(value);
 
         if (head == nullptr) {
@@ -67,26 +62,129 @@ public:
     void display() {
         node* current = head;
         while (current != nullptr) {
-            cout << current->data << " ";
+            if (current->revealed==true) {
+                cout << current->data << " ";
+            }
+            else {
+                cout<<"*";
+            }
             current = current->next;
         }
     }
 };
 
+class peakNode {
+public:
+    string data;
+    int level;
+    bool revealed;
+    bool removed;
+    peakNode* next;
+
+    peakNode(string value){
+        data=value;
+        revealed=false;
+        removed=false;
+        next=nullptr;
+    }
+    peakNode(){
+        data="";
+        revealed=false;
+        removed=false;
+        next=nullptr;
+    }
+};
+class peakList {
+public:
+    peakNode* head;
+
+    peakList() {
+        head=nullptr;
+    }
+
+    void insertEnd(string value) {
+        peakNode *temp = head;
+        peakNode *newNode = new peakNode(value);
+        if (temp == nullptr) {
+            head = newNode;
+            return;
+        }
+        while (temp->next != nullptr) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+    }
+
+    void display(int level) {
+        int countForLevel2=0;
+        int countForLevel3=0;
+        if (level==1) {
+            cout<<"            ";
+        }
+        else if (level==2) {
+            cout<<"        ";
+        }
+        else if (level==3) {
+            cout<<"    " ;
+        }
+        else {
+            cout<<"";
+        }
+        peakNode* current = head;
+        while (current != nullptr) {
+            if (level==1) {
+                cout<<"    ";
+            }
+            else if (level==2) {
+                cout<<"    ";
+            }
+            else if (level==3) {
+                cout<<"    " ;
+            }
+            else if (level==4){
+                cout<<"    ";
+            }
+            else {
+
+            }
+            cout << current->data;
+            countForLevel2++;
+            countForLevel3++;
+
+            if (level==1) {
+                cout<<"           ";
+            }
+            else if (level==2&&(countForLevel2==2||countForLevel2==4||countForLevel2==6)) {
+                cout<<"     ";
+            }
+            else if (level==3&&(countForLevel3==3||countForLevel3==6||countForLevel3==9)) {
+                cout<<"";
+            }
+            current = current->next;
+        }
+        cout<<endl;
+    }
+
+};
+
 class game {
 public:
-    linkedList peaksLL;
-    bool revealed[28];
-    string cards[52] = {
-    "SA","S2","S3","S4","S5","S6","S7","S8","S9","S10","SJ","SQ","SK",
-    "HA","H2","H3","H4","H5","H6","H7","H8","H9","H10","HJ","HQ","HK",
-    "DA","D2","D3","D4","D5","D6","D7","D8","D9","D10","DJ","DQ","DK",
-    "CA","C2","C3","C4","C5","C6","C7","C8","C9","C10","CJ","CQ","CK"
-     };
     linkedList stack1;
     linkedList stack2;
+
+    peakList array1;
+    peakList array2;
+    peakList array3;
+    peakList array4;
+
+    string cards[52] = {
+    "SA","S2","S3","S4","S5","S6","S7","S8","S9","S10","SJ","SQ","SK", "HA","H2","H3","H4","H5","H6","H7","H8","H9","H10","HJ","HQ","HK", "DA","D2","D3","D4","D5","D6","D7","D8","D9","D10","DJ","DQ","DK", "CA","C2","C3","C4","C5","C6","C7","C8","C9","C10","CJ","CQ","CK"
+     };
+
+
+
     void shuffleArray(string arr[]) {
-        for (int i = 52 - 1; i > 0; i--) {
+        for (int i = 51; i > 0; i--) {
             int j = rand() % (i + 1);
             string temp = arr[i];
             arr[i] = arr[j];
@@ -110,54 +208,67 @@ public:
         cout<<endl;
     }
 
-    int get_card(string card) {
-        if (card[1] == 'A')
-        {
-            return 1;
+    void aray1(string arr[]) {
+        for (int i=24;i<27;i++) {
+            array1.insertEnd(arr[i]);
         }
-
-        if (card[1] == 'J')
-        {
-            return 11;
-        }
-        if (card[1] == 'Q')
-        {
-            return 12;
-        }
-        if (card[1] == 'K')
-        {
-            return 13;
-        }
-        if (card.length() == 3)
-        {
-
-            return 10;
-        }
-
-
-        return card[1] - '0';
     }
 
-
-
-    void Peaks(string arr[])
-    {
-        int index = 24;
-
-        for (int i = 0; i < 28; i++)
-        {
-            peaksLL.insertAtEnd(arr[index]);
-            revealed[i] = false;
-            index++;
+    void aray2(string arr[]) {
+        for (int i=27;i<33;i++) {
+            array2.insertEnd(arr[i]);
         }
-        for (int i = 18; i < 28; i++)
-        {
-            revealed[i] = true;
-        }
+    }
 
+    void aray3(string arr[]) {
+        for (int i=33;i<42;i++) {
+            array3.insertEnd(arr[i]);
+        }
+    }
+
+    void aray4(string arr[]) {
+        for (int i=42;i<52;i++) {
+                array4.insertEnd(arr[i]);
+            }
+    }
+
+    void display() {
+        array1.display(1);
+        array2.display(2);
+        array3.display(3);
+        array4.display(4);
     }
 
 };
+void start() {
+    game Tripeaks;
+    int randomTimes = rand() %1000;
+    for (int i=0;i<=randomTimes;i++) {
+        Tripeaks.shuffleArray(Tripeaks.cards);
+    }
+
+    Tripeaks.makeStack1(Tripeaks.cards);
+    Tripeaks.makeStack2(Tripeaks.cards);
+    Tripeaks.displayStack1();
+    Tripeaks.displayStack2();
+    Tripeaks.aray1(Tripeaks.cards);
+    Tripeaks.aray2(Tripeaks.cards);
+    Tripeaks.aray3(Tripeaks.cards);
+    Tripeaks.aray4(Tripeaks.cards);
+    Tripeaks.display();
+
+
+}
+
+int main() {
+    start();
+    return 0;
+}
+
+
+/*#include <iostream>
+#include <ctime>
+using namespace std;
 
 void start() {
     game Tripeaks;
@@ -170,10 +281,17 @@ void start() {
     Tripeaks.makeStack2(Tripeaks.cards);
     Tripeaks.displayStack1();
     Tripeaks.displayStack2();
-    Tripeaks.Peaks(Tripeaks.cards);
+    Tripeaks.aray1(Tripeaks.cards);
+    Tripeaks.aray2(Tripeaks.cards);
+    Tripeaks.aray3(Tripeaks.cards);
+    Tripeaks.aray4(Tripeaks.cards);
+    Tripeaks.display();
+
+
 }
 
 int main() {
     start();
     return 0;
-}
+}*/
+
