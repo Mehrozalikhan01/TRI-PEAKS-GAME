@@ -80,6 +80,17 @@ public:
        }      
         updateFaceUpAll(); 
     }
+
+    void updateFaceUpAll()
+    {
+        for (int i = 0; i < 28; i++)
+        {
+            if (!removed[i] && isUnlocked(i))
+            {
+                faceUp[i] = true;
+            }
+        }
+    }
     void showCard(int i)
     {
         if (removed[i])
