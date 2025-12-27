@@ -90,7 +90,7 @@ public:
     }
    void initializeFaceUp() {
         for (int i = 0; i < 28; i++)
-        {
+     Stack   {
             faceUp[i] = false;
         }
 
@@ -115,6 +115,14 @@ public:
             {
                 faceUp[i] = true;
             }
+        }
+    }
+    void drawStock()
+    {
+        if (!stock.isEmpty()) 
+        {
+            waste.push(stock.pop());
+            updateFaceUpAll();
         }
     }
     void showCard(int i)
