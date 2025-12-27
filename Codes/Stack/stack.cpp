@@ -7,30 +7,54 @@ class Card {
 public:
     string suit;
     string rank;
+    int value;
 
-    Card() { suit = ""; rank = ""; }
+    Card() {
+        suit = "";
+        rank = "";
+        value = 0;
+    }
 
-    Card(string s, string r) {
+    Card(string s, string r, int v) {
         suit = s;
         rank = r;
+        value = v;
     }
 
     void display() {
-        cout << "[" << rank << suit << "]";
+        cout << "["<<rank << suit<<"]";
     }
+};
+  class Stack {
+private:
+    int topIndex;
+    Card arr[60];
+public:
+    Stack() { topIndex = -1; }
+
+    bool isEmpty() { return topIndex == -1; }
+
+    void push(Card c) { arr[++topIndex] = c; }
+
+    Card pop() { return arr[topIndex--]; }
+
+    Card top() { return arr[topIndex]; }
 };
 
 class TriPeaksDisplay {
 public:
     Card deck[52];
-    Card tableau[28];
-     bool removed[28];
-     bool faceUp[28];
+ bool faceUp[28];
+ bool removed[28];
+ Card tableau[28];
+ Stack stock;
+ Stack waste;
 
-    TriPeaksDisplay() {
-        createDeck();
-        shuffleDeck();
-        dealTriPeaks();
+    TriPeaksGame() {
+    createDeck();
+    shuffleDeck();
+    dealTriPeaks();
+    initializeFaceUp();
     }
 
     void createDeck() {
@@ -61,6 +85,8 @@ public:
             tableau[i] = deck[i];
             removed[i] = false;
         }
+    for (int i = 28; i < 52; i++) {
+    stock.push(deck[i]);
     }
    void initializeFaceUp() {
         for (int i = 0; i < 28; i++)
