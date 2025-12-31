@@ -125,6 +125,17 @@ public:
             updateFaceUpAll();
         }
     }
+    bool allRemoved()
+    {
+        for (int i = 0; i < 28; i++)
+        {
+           if (!removed[i]) 
+           {
+              return false;
+           }    
+        }        
+        return true;
+    }
     void showCard(int i)
     {
         if (removed[i])
