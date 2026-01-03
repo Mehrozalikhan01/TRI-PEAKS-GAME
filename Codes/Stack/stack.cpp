@@ -117,6 +117,36 @@ public:
             }
         }
     }
+
+    bool playCard(int i) 
+    {
+     if (!faceUp[i] || removed[i])    
+     {
+         return false;
+     }       
+     if (!isUnlocked(i))
+     {
+          return false;
+     }
+     if (waste.isEmpty())
+     {
+          return false;
+     }
+         
+     Card top = waste.top();
+
+     if (!isAdjacent(top, tableau[i])) 
+     {
+         return false;
+     }
+         
+     waste.push(tableau[i]);
+     removed[i] = true;
+
+     updateFaceUpAll();
+
+     return true;
+ }
     void drawStock()
     {
         if (!stock.isEmpty()) 
