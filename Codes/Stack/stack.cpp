@@ -187,6 +187,45 @@ public:
 
         cout << "==============================================\n\n";
     }
+
+     bool isUnlocked(int i)
+      {
+     if (removed[i]) return false;
+
+   
+     if (i >= 18 && i <= 27)
+      return faceUp[i];
+
+     
+     int child1 = -1, child2 = -1;
+
+     if (i >= 9 && i <= 17)
+      {
+        
+         child1 = 18 + (i - 9);
+         child2 = child1 + 1;
+     }
+     else if (i >= 3 && i <= 8)
+      {
+         
+         child1 = 9 + (i - 3);
+         child2 = child1 + 1;
+     }
+     else if (i >= 0 && i <= 2)
+      {
+        
+         child1 = 3 + i * 2;
+         child2 = 4 + i * 2;
+     }
+
+     
+     if (child1 < 0 || child1 >= 28) 
+     return true;
+     if (child2 < 0 || child2 >= 28)
+      return true;
+
+     return removed[child1] && removed[child2];
+ }
 };
 
 int main() {
