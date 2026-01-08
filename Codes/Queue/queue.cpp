@@ -1,5 +1,6 @@
 #include <iostream>
 using namespace std;
+
 template<class t>
 class queue{
 public:
@@ -23,6 +24,9 @@ t dequeue(){
 }
 t front(){   
     return ptr[rear];
+}
+t empty(){
+    return rear==fron+1;
 }
 
 void card(){
@@ -65,19 +69,19 @@ for(int i=1;i<=13;i++){
 }
 
 void display(queue<int> &q1,queue<int> &q2,queue<int> &q3,queue<int> &q4,queue<int> &q5,queue<int> &q6,queue<int> &q7,queue<int> &q8,queue<int> &q9,queue<int> &q10,queue<int> &q11){
-if((q1.rear > q2.rear)&&(q2.rear==q2.fron)){
+if((q1.rear == q2.rear)&&(q2.rear==q2.fron+1)){
 cout<<"     ";q1.card();
 }else if(q1.rear<=3 ){
     cout<<"     "<<"*";
 }else{
     cout<<"      ";}
-if((q4.rear > q5.rear)&&(q5.rear==q5.fron)){
+if((q4.rear == q5.rear)&&(q5.rear==q5.fron+1)){
 cout<<"     ";q4.card();
 }else if(q4.rear<=3){
     cout<<"     "<<"*";
 }else{
     cout<<"      ";}
-if((q7.rear > q8.rear)&&(q8.rear==q8.fron)){
+if((q7.rear == q8.rear)&&(q8.rear==q8.fron+1)){
 cout<<"     ";q7.card();cout<<endl;
 }else if(q7.rear<=3){
     cout<<"     "<<"*"<<endl;
@@ -227,6 +231,8 @@ if(q10.rear == 0){
 
 cout<<endl<<" ";q11.card();cout<<" *"<<endl;
 
+
+
 }
 void update(queue<int> &q11,queue<int> &q){
     int cnt=0;
@@ -283,11 +289,22 @@ incstock(num,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11);
         cout<<"This card cant be addon the stack \n";
     }
 }
+
+void chkwin(queue<int> &q1,queue<int> &q2,queue<int> &q3,queue<int> &q4,queue<int> &q5,queue<int> &q6,queue<int> &q7,queue<int> &q8,queue<int> &q9,queue<int> &q10,queue<int> &q11){
+    if(q1.empty() && q2.empty() && q3.empty() && q4.empty() && q5.empty() && q6.empty() && q7.empty() && q8.empty() && q9.empty() && q10.empty() ){
+cout<<"YOU WIN!";
+exit(0);}
+else if(q11.empty()){
+    cout<<"YOUR LOSE!";
+    exit(0);}
+}
+
  void functioning(queue<int> &q1,queue<int> &q2,queue<int> &q3,queue<int> &q4,queue<int> &q5,queue<int> &q6,queue<int> &q7,queue<int> &q8,queue<int> &q9,queue<int> &q10,queue<int> &q11){
     filling(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11);
     while(q11.rear != q11.fron){
     display(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11);
-    inputing(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11);}
+    inputing(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11);
+    chkwin(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11);}
 
  }
 int main(){
