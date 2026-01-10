@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ctime>
+#include "raylib.h"
 #include <string>
 using namespace std;
 
@@ -541,16 +542,17 @@ bool validMove(){
     if(stack1.head!=nullptr){
         return true;
     }
-     if(stack2.head!=nullptr){
+     if(stack2.head==nullptr){
         return false;
     }
-    node* stk2Temp=stack2.head;
+    node* stk2Temp = stack2.head;
     while(stk2Temp->next!=nullptr){
         stk2Temp=stk2Temp->next;
     }
     string t=stk2Temp->data;
-    char stkSecond=t[1];
-    node* temp=array1.head;
+    char stkSecond= t[1];
+
+    node* temp = array1.head;
     while(temp!=nullptr){
         if(temp->revealed&&!temp->removed){
             char cardSecond=temp->data[1];
@@ -695,7 +697,11 @@ bool isValid(char card,char stack){
 
 
 int main(){
-char ch = 219; // The solid block
+    int swidth=1000;
+    int slenght=900;
+     InitWindow(swidth, slenght, "TriPeaks - Raylib Window");
+     SetTargetFPS(60);
+/*char ch = 219; // The solid block*/
 
     cout<<"================================================================"<<endl;
     cout<<"=========================TRIPEAKS==============================="<<endl;
@@ -738,15 +744,25 @@ char ch = 219; // The solid block
     Setup.makeLevel4Reveal();
     Setup.stack2Reveal();
     Setup.displayGame();
-
-    while(true){
-    Setup.takeInput();
+    while (!WindowShouldClose())
+    {
+        if (Setup.validMove())
+        {Setup.displayGame();
+        Setup.takeInput();
     Setup.reveal();
-    Setup.stack2Reveal();
-    Setup.displayGame();
-    if(!Setup.validMove()){
-        cout<<"No valid moves left! Game Over."<<endl;
-        break;
-    }
+Setup.stack2Reveal();
 }
+else 
+{ cout<<"NO valid moves left! Game over, "<<endl;
+cout<<"Press ENTER to exit..."<<endl;
+cin.ignore(numeric_limits<streamsize> ::max(), '\n');
+break;
+    }
+    BeginDrawing();
+    ClearBackground (WHITE);
+    Drawtext("Tipeaks Game", 40, 40, 20, RAYWHITE);
+    EndDrawing();
+}
+CLoseWindow();
+return 0;
 }
