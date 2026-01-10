@@ -655,6 +655,8 @@ bool isValid(char card,char stack){
         else{
         cout<<"No more cards in stock!"<<endl;
     }
+    cout << endl;
+}
 
         return;
     }
