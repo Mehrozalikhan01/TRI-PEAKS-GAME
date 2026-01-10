@@ -448,22 +448,6 @@ public:
                 temp=temp->next;
             }
         }
-        if(!found){
-            cout<<"Enter again: ";
-            cin>>in;
-            if(in=="99"){
-                    if(stack1.head!=nullptr){
-            node* temp=stack1.head;
-            stack1.head=stack1.head->next;
-            stack2.insertAtEnd(temp->data);
-            delete temp;
-        }
-        else{
-        cout<<"No more cards in stock!"<<endl;
-    }
-                return;
-            }
-        }
     }
 }
     void initializeChildren(){
@@ -518,34 +502,37 @@ public:
     node* temp=array1.head;
     while(temp!=nullptr){
         if(!temp->revealed){
-            if(temp->child1!=nullptr&&temp->child2!=nullptr){
-                if(temp->child1->removed&&temp->child2->removed){
+            if((!temp->child1&&!temp->child2)||
+            (temp->child1 && temp->child2 &&
+             temp->child1->removed && temp->child2->removed ))
+            {
                     temp->revealed=true;
-                }
             }
+            }
+            temp=temp->next;
         }
-        temp=temp->next;
-    }
-    temp=array2.head;
-    while(temp!=nullptr){
+    temp = array2.head;
+    while (temp!=nullptr){
         if(!temp->revealed){
-            if(temp->child1!=nullptr&&temp->child2!=nullptr){
-                if(temp->child1->removed&&temp->child2->removed){
+            if((!temp->child1&&!temp->child2)||
+            (temp->child1 && temp->child2 &&
+             temp->child1->removed && temp->child2->removed ))
+            {
                     temp->revealed=true;
-                }
             }
-        }
+            }
         temp=temp->next;
     }
     temp=array3.head;
     while(temp!=nullptr){
         if(!temp->revealed){
-            if(temp->child1!=nullptr&&temp->child2!=nullptr){
-                if(temp->child1->removed&&temp->child2->removed){
+            if((!temp->child1&&!temp->child2)||
+            (temp->child1 && temp->child2 &&
+             temp->child1->removed && temp->child2->removed ))
+            {
                     temp->revealed=true;
-                }
             }
-        }
+            }
         temp=temp->next;
     }
 }
@@ -553,6 +540,9 @@ public:
 bool validMove(){
     if(stack1.head!=nullptr){
         return true;
+    }
+     if(stack2.head!=nullptr){
+        return false;
     }
     node* stk2Temp=stack2.head;
     while(stk2Temp->next!=nullptr){
@@ -642,73 +632,67 @@ bool isValid(char card,char stack){
     }
     return false;
 }
-    void takeInput(){
-    cout<<"Enter a card name: ";
-    cin>>input;
-    if(input=="99"){
-        if(stack1.head!=nullptr){
-            node* temp=stack1.head;
-            stack1.head=stack1.head->next;
+    void takeInput() {
+    cout << "Enter a card name: ";
+    cin >> input;
+
+    if (input == "99") {
+        if (stack1.head != nullptr) {
+            node* temp = stack1.head;
+            stack1.head = stack1.head->next;
             stack2.insertAtEnd(temp->data);
             delete temp;
+        } else {
+            cout << "No more cards in stock!" << endl;
         }
-        else{
-        cout<<"No more cards in stock!"<<endl;
-    }
-    cout << endl;
-}
-
-        return;
+        cout << endl;
+        return;         // only return in the 99 case
     }
 
     validateInput(input);
-    node* temp=array1.head;
-    while(temp!=nullptr){
-        if(temp->revealed&&!temp->removed){
-            if(input==temp->data){
-                temp->removed=true;
-                stack2.insertAtEnd(temp->data);
-                reveal();
-            }
+
+    node* temp = array1.head;
+    while (temp != nullptr) {
+        if (temp->revealed && !temp->removed && input == temp->data) {
+            temp->removed = true;
+            stack2.insertAtEnd(temp->data);
+            reveal();
         }
-        temp=temp->next;
+        temp = temp->next;
     }
-    temp=array2.head;
-    while(temp!=nullptr){
-        if(temp->revealed&&!temp->removed){
-            if(input==temp->data){
-                temp->removed=true;
-                stack2.insertAtEnd(temp->data);
-                reveal();
-            }
+
+    temp = array2.head;
+    while (temp != nullptr) {
+        if (temp->revealed && !temp->removed && input == temp->data) {
+            temp->removed = true;
+            stack2.insertAtEnd(temp->data);
+            reveal();
         }
-        temp=temp->next;
+        temp = temp->next;
     }
-    temp=array3.head;
-    while(temp!=nullptr){
-        if(temp->revealed&&!temp->removed){
-            if(input==temp->data){
-                temp->removed=true;
-                stack2.insertAtEnd(temp->data);
-                reveal();
-            }
+
+    temp = array3.head;
+    while (temp != nullptr) {
+        if (temp->revealed && !temp->removed && input == temp->data) {
+            temp->removed = true;
+            stack2.insertAtEnd(temp->data);
+            reveal();
         }
-        temp=temp->next;
+        temp = temp->next;
     }
-    temp=array4.head;
-    while(temp!=nullptr){
-        if(temp->revealed&&!temp->removed){
-            if(input==temp->data){
-                temp->removed=true;
-                stack2.insertAtEnd(temp->data);
-                reveal();
-            }
+
+    temp = array4.head;
+    while (temp != nullptr) {
+        if (temp->revealed && !temp->removed && input == temp->data) {
+            temp->removed = true;
+            stack2.insertAtEnd(temp->data);
+            reveal();
         }
-        temp=temp->next;
+        temp = temp->next;
     }
 }
-
 };
+
 
 int main(){
 char ch = 219; // The solid block
