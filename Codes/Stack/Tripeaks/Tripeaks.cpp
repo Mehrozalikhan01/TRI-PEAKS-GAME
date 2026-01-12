@@ -1,6 +1,7 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include <fstream>
 using namespace std;
 
 class Card
@@ -58,6 +59,30 @@ public:
     Card top()
     {
         return arr[topIndex];
+    }
+
+    
+    void saveStack(ofstream &file)
+    {
+        file << topIndex + 1 << " ";
+        for (int i = 0; i <= topIndex; i++)
+            file << arr[i].rank << " " << arr[i].suit << " " << arr[i].value << " ";
+        file << "\n";
+    }
+
+   
+    void loadStack(ifstream &file)
+    {
+        int size;
+        file >> size;
+        topIndex = -1;
+        for (int i = 0; i < size; i++)
+        {
+            string r, s;
+            int v;
+            file >> r >> s >> v;
+            push(Card(s, r, v));
+        }
     }
 };
 
@@ -305,17 +330,55 @@ public:
         return -1;
     }
 
+   
+    void saveGame()
+    {
+        ofstream file("TriPeaksSave.txt");
+        for (int i = 0; i < 28; i++)
+        {
+            file << tableau[i].rank << " " << tableau[i].suit << " " << tableau[i].value << " "
+                 << faceUp[i] << " " << removed[i] << "\n";
+        }
+        stock.saveStack(file);
+        waste.saveStack(file);
+        file.close();
+        cout << "Game Saved Successfully!\n";
+    }
+
+    bool loadGame()
+    {
+        ifstream file("TriPeaksSave.txt");
+        if (!file) return false;
+
+        for (int i = 0; i < 28; i++)
+        {
+            file >> tableau[i].rank >> tableau[i].suit >> tableau[i].value
+                 >> faceUp[i] >> removed[i];
+        }
+        stock.loadStack(file);
+        waste.loadStack(file);
+        file.close();
+        return true;
+    }
+
     void startGame()
     {
         int choice;
 
+        cout << "Do you want to continue previous game? (1 = Yes, 0 = No): ";
+        int cont;
+        cin >> cont;
+        if (cont == 1)
+        {
+            if (!loadGame())
+            {
+                cout << "No saved game found. Starting new game.\n";
+            }
+        }
+
         while (true)
         {
-
-
             system("cls");
-
-
             displayLayout();
 
             if (allRemoved()) {
@@ -323,7 +386,7 @@ public:
                 break;
             }
 
-            cout << "1. Play Card\n2. Draw Stock\n3. Exit\nChoice: ";
+            cout << "1. Play Card\n2. Draw Stock\n3. Save Game\n4. Exit\nChoice: ";
             cin >> choice;
 
             if (choice == 1)
@@ -357,7 +420,14 @@ public:
             {
                 drawStock();
             }
-            else if (choice == 3) break;
+            else if (choice == 3)
+            {
+                saveGame();
+                cout << "Press Enter to continue...";
+                cin.ignore();
+                cin.get();
+            }
+            else if (choice == 4) break;
         }
     }
 };
