@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ctime>
+#include "raylib.h"
 #include <string>
 #include "raylib.h"
 using namespace std;
@@ -351,6 +352,7 @@ public:
             }
             temp = temp->next;
         }
+<<<<<<< HEAD
         temp = array2.head;
         while (temp != nullptr) {
             if (temp->revealed && !temp->removed) {
@@ -368,6 +370,19 @@ public:
                 if (isValid(cardSecond, stkSecond)) {
                     return true;
                 }
+=======
+    }
+}
+    void initializeChildren(){
+    node* temp3=array3.head;
+    node* temp4=array4.head;
+    int index4=0;
+    while(temp3!=nullptr){
+        if(temp4!=nullptr){
+            temp3->child1=temp4;
+            if(temp4->next!=nullptr){
+                temp3->child2=temp4->next;
+>>>>>>> 8af33081e5bfd17d20eab1ad0be782c1f9f9915a
             }
             temp = temp->next;
         }
@@ -383,6 +398,7 @@ public:
         }
         return false;
     }
+<<<<<<< HEAD
     bool isValid(char card, char stack) {
         if (card >= '2' && card <= '9') {
             int cardVal = card - '0';
@@ -401,8 +417,37 @@ public:
                 if (cardVal == 9) {
                     return true;
                 }
-            }
+=======
+    node* temp1=array1.head;
+    temp2=array2.head;
+    while(temp1!=nullptr&&temp2!=nullptr){
+        temp1->child1=temp2;
+        if(temp2->next!=nullptr){
+            temp1->child2=temp2->next;
         }
+        if(temp2->next!=nullptr&&temp2->next->next!=nullptr){
+            temp2=temp2->next->next;
+        }else{
+            break;
+        }
+        temp1=temp1->next;
+    }
+}
+    void reveal(){
+    node* temp=array1.head;
+    while(temp!=nullptr){
+        if(!temp->revealed){
+            if((!temp->child1&&!temp->child2)||
+            (temp->child1 && temp->child2 &&
+             temp->child1->removed && temp->child2->removed ))
+            {
+                    temp->revealed=true;
+>>>>>>> 8af33081e5bfd17d20eab1ad0be782c1f9f9915a
+            }
+            }
+            temp=temp->next;
+        }
+<<<<<<< HEAD
         else if (card == 'A') {
             if (stack == '2' || stack == 'K') {
                 return true;
@@ -429,6 +474,31 @@ public:
             }
         }
         return false;
+=======
+    temp = array2.head;
+    while (temp!=nullptr){
+        if(!temp->revealed){
+            if((!temp->child1&&!temp->child2)||
+            (temp->child1 && temp->child2 &&
+             temp->child1->removed && temp->child2->removed ))
+            {
+                    temp->revealed=true;
+            }
+            }
+        temp=temp->next;
+    }
+    temp=array3.head;
+    while(temp!=nullptr){
+        if(!temp->revealed){
+            if((!temp->child1&&!temp->child2)||
+            (temp->child1 && temp->child2 &&
+             temp->child1->removed && temp->child2->removed ))
+            {
+                    temp->revealed=true;
+            }
+            }
+        temp=temp->next;
+>>>>>>> 8af33081e5bfd17d20eab1ad0be782c1f9f9915a
     }
 
 
@@ -530,6 +600,7 @@ public:
         }
         return true;
     }
+<<<<<<< HEAD
     void drawDifficultyScreen() {
         DrawRectangle(0, 0, 1400, 900, Color{ 34, 139, 34, 255 }); // Forest green background
 
@@ -913,4 +984,229 @@ int main() {
 
     CloseWindow();
     return 0;
+=======
+     if(stack2.head==nullptr){
+        return false;
+    }
+    node* stk2Temp = stack2.head;
+    while(stk2Temp->next!=nullptr){
+        stk2Temp=stk2Temp->next;
+    }
+    string t=stk2Temp->data;
+    char stkSecond= t[1];
+
+    node* temp = array1.head;
+    while(temp!=nullptr){
+        if(temp->revealed&&!temp->removed){
+            char cardSecond=temp->data[1];
+            if(isValid(cardSecond,stkSecond)){
+                return true;
+            }
+        }
+        temp=temp->next;
+    }
+    temp=array2.head;
+    while(temp!=nullptr){
+        if(temp->revealed&&!temp->removed){
+            char cardSecond=temp->data[1];
+            if(isValid(cardSecond,stkSecond)){
+                return true;
+            }
+        }
+        temp=temp->next;
+    }
+    temp=array3.head;
+    while(temp!=nullptr){
+        if(temp->revealed&&!temp->removed){
+            char cardSecond=temp->data[1];
+            if(isValid(cardSecond,stkSecond)){
+                return true;
+            }
+        }
+        temp=temp->next;
+    }
+    temp=array4.head;
+    while(temp!=nullptr){
+        if(temp->revealed&&!temp->removed){
+            char cardSecond=temp->data[1];
+            if(isValid(cardSecond,stkSecond)){
+                return true;
+            }
+        }
+        temp=temp->next;
+    }
+    return false;
+}
+bool isValid(char card,char stack){
+    if(card>='2'&&card<='9'){
+        int cardVal=card-'0';
+        if(stack>='2'&&stack<='9'){
+            int stackVal=stack-'0';
+            if(cardVal==stackVal+1||cardVal==stackVal-1){
+                return true;
+            }
+        }else if(stack=='A'){
+            if(cardVal==2){
+                return true;
+            }
+        }else if(stack=='T'){
+            if(cardVal==9){
+                return true;
+            }
+        }
+    }else if(card=='A'){
+        if(stack=='2'||stack=='K'){
+            return true;
+        }
+    }else if(card=='T'){
+        if(stack=='9'||stack=='J'){
+            return true;
+        }
+    }else if(card=='J'){
+        if(stack=='T'||stack=='Q'){
+            return true;
+        }
+    }else if(card=='Q'){
+        if(stack=='J'||stack=='K'){
+            return true;
+        }
+    }else if(card=='K'){
+        if(stack=='Q'||stack=='A'){
+            return true;
+        }
+    }
+    return false;
+}
+    void takeInput() {
+    cout << "Enter a card name: ";
+    cin >> input;
+
+    if (input == "99") {
+        if (stack1.head != nullptr) {
+            node* temp = stack1.head;
+            stack1.head = stack1.head->next;
+            stack2.insertAtEnd(temp->data);
+            delete temp;
+        } else {
+            cout << "No more cards in stock!" << endl;
+        }
+        cout << endl;
+        return;         // only return in the 99 case
+    }
+
+    validateInput(input);
+
+    node* temp = array1.head;
+    while (temp != nullptr) {
+        if (temp->revealed && !temp->removed && input == temp->data) {
+            temp->removed = true;
+            stack2.insertAtEnd(temp->data);
+            reveal();
+        }
+        temp = temp->next;
+    }
+
+    temp = array2.head;
+    while (temp != nullptr) {
+        if (temp->revealed && !temp->removed && input == temp->data) {
+            temp->removed = true;
+            stack2.insertAtEnd(temp->data);
+            reveal();
+        }
+        temp = temp->next;
+    }
+
+    temp = array3.head;
+    while (temp != nullptr) {
+        if (temp->revealed && !temp->removed && input == temp->data) {
+            temp->removed = true;
+            stack2.insertAtEnd(temp->data);
+            reveal();
+        }
+        temp = temp->next;
+    }
+
+    temp = array4.head;
+    while (temp != nullptr) {
+        if (temp->revealed && !temp->removed && input == temp->data) {
+            temp->removed = true;
+            stack2.insertAtEnd(temp->data);
+            reveal();
+        }
+        temp = temp->next;
+    }
+}
+};
+
+
+int main(){
+    int swidth=1000;
+    int slenght=900;
+     InitWindow(swidth, slenght, "TriPeaks - Raylib Window");
+     SetTargetFPS(60);
+/*char ch = 219; // The solid block*/
+
+    cout<<"================================================================"<<endl;
+    cout<<"=========================TRIPEAKS==============================="<<endl;
+    cout<<"================================================================"<<endl;
+    cout<<endl;
+    cout<<"                    ~~ HOW TO PLAY ~~                      "<<endl;
+    cout<<endl;
+    cout<<"  OBJECTIVE: Clear all cards from the three peaks!         "<<endl;
+    cout<<endl;
+    cout<<"  RULES:                                                    "<<endl;
+    cout<<"  • Select cards that are ONE rank higher or lower         "<<endl;
+    cout<<"    than the top card of the waste pile                    "<<endl;
+    cout<<"  • Example: If waste pile shows 7, you can play 6 or 8    "<<endl;
+    cout<<"  • Kings (K) wrap with Aces (A) and Queens (Q)            "<<endl;
+    cout<<"  • Aces (A) wrap with Kings (K) and Twos (2)              "<<endl;
+    cout<<endl;
+    cout<<"  COMMANDS:                                                 "<<endl;
+    cout<<"  • Enter card name (e.g., SA, H7, DK) to play a card      "<<endl;
+    cout<<"  • Enter 99 to draw a new card from the stock pile        "<<endl;
+    cout<<endl;
+    cout<<"  SYMBOLS:                                                  "<<endl;
+    cout<<"  • ** = Hidden card (not yet playable)                    "<<endl;
+    cout<<"  • __ = Removed card (already played)                     "<<endl;
+    cout<<"  • Card codes: S=Spades, H=Hearts, D=Diamonds, C=Clubs    "<<endl;
+    cout<<"  • Ranks: A,2-9,T(10),J,Q,K                               "<<endl;
+    cout<<endl;
+    cout<<"============================================================"<<endl;
+    cout<<endl;
+    cout<<"            Press ENTER to start the game...               "<<endl;
+    cin.get();
+    cout<<endl;
+
+    srand(time(0));
+    setup Setup;
+    Setup.shuffle();
+    Setup.makeStacks();
+    Setup.makeLevels();
+    Setup.initializeLevels();
+    Setup.initializeChildren();
+    Setup.makeLevel4Reveal();
+    Setup.stack2Reveal();
+    Setup.displayGame();
+    while (!WindowShouldClose())
+    {
+        if (Setup.validMove())
+        {Setup.displayGame();
+        Setup.takeInput();
+    Setup.reveal();
+Setup.stack2Reveal();
+}
+else 
+{ cout<<"NO valid moves left! Game over, "<<endl;
+cout<<"Press ENTER to exit..."<<endl;
+cin.ignore(numeric_limits<streamsize> ::max(), '\n');
+break;
+    }
+    BeginDrawing();
+    ClearBackground (WHITE);
+    Drawtext("Tipeaks Game", 40, 40, 20, RAYWHITE);
+    EndDrawing();
+}
+CLoseWindow();
+return 0;
+>>>>>>> 8af33081e5bfd17d20eab1ad0be782c1f9f9915a
 }
