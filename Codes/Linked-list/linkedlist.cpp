@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ctime>
+#include "raylib.h"
 #include <string>
 #include "raylib.h"
 using namespace std;
@@ -351,6 +352,10 @@ public:
             }
             temp = temp->next;
         }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> main
         temp = array2.head;
         while (temp != nullptr) {
             if (temp->revealed && !temp->removed) {
@@ -368,6 +373,22 @@ public:
                 if (isValid(cardSecond, stkSecond)) {
                     return true;
                 }
+<<<<<<< HEAD
+=======
+=======
+    }
+}
+    void initializeChildren(){
+    node* temp3=array3.head;
+    node* temp4=array4.head;
+    int index4=0;
+    while(temp3!=nullptr){
+        if(temp4!=nullptr){
+            temp3->child1=temp4;
+            if(temp4->next!=nullptr){
+                temp3->child2=temp4->next;
+>>>>>>> 8af33081e5bfd17d20eab1ad0be782c1f9f9915a
+>>>>>>> main
             }
             temp = temp->next;
         }
@@ -383,6 +404,10 @@ public:
         }
         return false;
     }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> main
     bool isValid(char card, char stack) {
         if (card >= '2' && card <= '9') {
             int cardVal = card - '0';
@@ -401,6 +426,7 @@ public:
                 if (cardVal == 9) {
                     return true;
                 }
+<<<<<<< HEAD
             }
         }
         else if (card == 'A') {
@@ -429,6 +455,90 @@ public:
             }
         }
         return false;
+=======
+=======
+    node* temp1=array1.head;
+    temp2=array2.head;
+    while(temp1!=nullptr&&temp2!=nullptr){
+        temp1->child1=temp2;
+        if(temp2->next!=nullptr){
+            temp1->child2=temp2->next;
+        }
+        if(temp2->next!=nullptr&&temp2->next->next!=nullptr){
+            temp2=temp2->next->next;
+        }else{
+            break;
+        }
+        temp1=temp1->next;
+    }
+}
+    void reveal(){
+    node* temp=array1.head;
+    while(temp!=nullptr){
+        if(!temp->revealed){
+            if((!temp->child1&&!temp->child2)||
+            (temp->child1 && temp->child2 &&
+             temp->child1->removed && temp->child2->removed ))
+            {
+                    temp->revealed=true;
+>>>>>>> 8af33081e5bfd17d20eab1ad0be782c1f9f9915a
+            }
+            }
+            temp=temp->next;
+        }
+<<<<<<< HEAD
+        else if (card == 'A') {
+            if (stack == '2' || stack == 'K') {
+                return true;
+            }
+        }
+        else if (card == 'T') {
+            if (stack == '9' || stack == 'J') {
+                return true;
+            }
+        }
+        else if (card == 'J') {
+            if (stack == 'T' || stack == 'Q') {
+                return true;
+            }
+        }
+        else if (card == 'Q') {
+            if (stack == 'J' || stack == 'K') {
+                return true;
+            }
+        }
+        else if (card == 'K') {
+            if (stack == 'Q' || stack == 'A') {
+                return true;
+            }
+        }
+        return false;
+=======
+    temp = array2.head;
+    while (temp!=nullptr){
+        if(!temp->revealed){
+            if((!temp->child1&&!temp->child2)||
+            (temp->child1 && temp->child2 &&
+             temp->child1->removed && temp->child2->removed ))
+            {
+                    temp->revealed=true;
+            }
+            }
+        temp=temp->next;
+    }
+    temp=array3.head;
+    while(temp!=nullptr){
+        if(!temp->revealed){
+            if((!temp->child1&&!temp->child2)||
+            (temp->child1 && temp->child2 &&
+             temp->child1->removed && temp->child2->removed ))
+            {
+                    temp->revealed=true;
+            }
+            }
+        temp=temp->next;
+>>>>>>> 8af33081e5bfd17d20eab1ad0be782c1f9f9915a
+>>>>>>> main
     }
 
 
@@ -530,12 +640,17 @@ public:
         }
         return true;
     }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> main
     void drawDifficultyScreen() {
         DrawRectangle(0, 0, 1400, 900, Color{ 34, 139, 34, 255 }); // Forest green background
 
         // Title
         DrawText("TRIPEAKS SOLITAIRE", 380, 100, 60, WHITE);
         DrawRectangle(350, 170, 700, 5, GOLD);
+<<<<<<< HEAD
 
         // Instructions
         DrawText("Select Difficulty Level", 480, 220, 30, YELLOW);
@@ -914,3 +1029,608 @@ int main() {
     CloseWindow();
     return 0;
 }
+=======
+
+        // Instructions
+        DrawText("Select Difficulty Level", 480, 220, 30, YELLOW);
+
+        // Easy Button
+        DrawRectangleRounded({ 450.0f, 320.0f, 500.0f, 80.0f }, 0.2f, 10, Fade(GREEN, 0.8f));
+        DrawRectangleRoundedLines({ 450.0f, 320.0f, 500.0f, 80.0f }, 0.2f, 10, WHITE);
+        DrawText("EASY", 650, 345, 30, WHITE);
+        DrawText("(5 shuffles)", 630, 375, 16, LIGHTGRAY);
+
+        // Medium Button
+        DrawRectangleRounded({ 450.0f, 430.0f, 500.0f, 80.0f }, 0.2f, 10, Fade(ORANGE, 0.8f));
+        DrawRectangleRoundedLines({ 450.0f, 430.0f, 500.0f, 80.0f }, 0.2f, 10, WHITE);
+        DrawText("MEDIUM", 620, 455, 30, WHITE);
+        DrawText("(10 shuffles)", 625, 485, 16, LIGHTGRAY);
+
+        // Hard Button
+        DrawRectangleRounded({ 450.0f, 540.0f, 500.0f, 80.0f }, 0.2f, 10, Fade(RED, 0.8f));
+        DrawRectangleRoundedLines({ 450.0f, 540.0f, 500.0f, 80.0f }, 0.2f, 10, WHITE);
+        DrawText("HARD", 650, 565, 30, WHITE);
+        DrawText("(20 shuffles)", 625, 595, 16, LIGHTGRAY);
+
+        // Footer
+        DrawText("Click to select your difficulty", 500, 750, 20, RAYWHITE);
+    }
+    void handleDifficultyClick(int mouseX, int mouseY) {
+        // Check Easy button (450, 320, 500x80)
+        if (mouseX >= 450 && mouseX <= 950 && mouseY >= 320 && mouseY <= 400) {
+            difficulty = 1;
+            difficultySelected = true;
+        }
+        // Check Medium button (450, 430, 500x80)
+        else if (mouseX >= 450 && mouseX <= 950 && mouseY >= 430 && mouseY <= 510) {
+            difficulty = 2;
+            difficultySelected = true;
+        }
+        // Check Hard button (450, 540, 500x80)
+        else if (mouseX >= 450 && mouseX <= 950 && mouseY >= 540 && mouseY <= 620) {
+            difficulty = 3;
+            difficultySelected = true;
+        }
+    }
+    void drawCard(string cardData, int x, int y, bool isRevealed, bool isRemoved) {
+        int cardWidth = 90;  // Bigger cards
+        int cardHeight = 120;
+        float roundness = 0.12f;
+
+        if (isRemoved) {
+            // Empty space
+            DrawRectangleRounded({ (float)x, (float)y, (float)cardWidth, (float)cardHeight }, roundness, 10, Fade(DARKGREEN, 0.2f));
+            DrawRectangleRoundedLines({ (float)x, (float)y, (float)cardWidth, (float)cardHeight }, roundness, 10, Fade(WHITE, 0.15f));
+        }
+        else if (isRevealed) {
+            // Shadow
+            DrawRectangleRounded({ (float)x + 4, (float)y + 4, (float)cardWidth, (float)cardHeight }, roundness, 10, Fade(BLACK, 0.5f));
+
+            // Card background with slight gradient effect
+            DrawRectangleRounded({ (float)x, (float)y, (float)cardWidth, (float)cardHeight }, roundness, 10, Color{ 250, 250, 250, 255 });
+            DrawRectangleRounded({ (float)x + 2, (float)y + 2, (float)cardWidth - 4, (float)cardHeight - 4 }, roundness, 10, WHITE);
+            DrawRectangleRoundedLines({ (float)x, (float)y, (float)cardWidth, (float)cardHeight }, roundness, 10, Color{ 180, 180, 180, 255 });
+
+            // Determine card color
+            Color textColor = BLACK;
+            Color suitColor = BLACK;
+            if (cardData[0] == 'H' || cardData[0] == 'D') {
+                textColor = Color{ 220, 20, 60, 255 }; // Crimson red
+                suitColor = Color{ 220, 20, 60, 255 };
+            }
+
+            // Draw rank (larger)
+            DrawText(cardData.c_str(), x + 28, y + 45, 32, textColor);
+
+            // Draw small suit indicators in corners
+            string rank(1, cardData[0]);
+            DrawText(rank.c_str(), x + 8, y + 8, 16, suitColor);
+            DrawText(rank.c_str(), x + cardWidth - 20, y + cardHeight - 24, 16, suitColor);
+        }
+        else {
+            // Shadow for hidden card
+            DrawRectangleRounded({ (float)x + 4, (float)y + 4, (float)cardWidth, (float)cardHeight }, roundness, 10, Fade(BLACK, 0.5f));
+
+            // Card back with pattern
+            DrawRectangleRounded({ (float)x, (float)y, (float)cardWidth, (float)cardHeight }, roundness, 10, Color{ 30, 60, 140, 255 }); // Royal blue
+            DrawRectangleRounded({ (float)x + 3, (float)y + 3, (float)cardWidth - 6, (float)cardHeight - 6 }, roundness, 10, Color{ 40, 80, 180, 255 });
+            DrawRectangleRoundedLines({ (float)x, (float)y, (float)cardWidth, (float)cardHeight }, roundness, 10, Color{ 20, 40, 100, 255 });
+
+            // Decorative pattern
+            for (int i = 0; i < 3; i++) {
+                DrawCircle(x + 30 + i * 15, y + 40, 8, Fade(SKYBLUE, 0.3f));
+                DrawCircle(x + 30 + i * 15, y + 80, 8, Fade(SKYBLUE, 0.3f));
+            }
+        }
+    }
+    void drawGame() {
+        // Background
+        DrawRectangle(0, 0, 1400, 900, Color{ 34, 139, 34, 255 }); // Forest green
+
+        // Score Panel (left side)
+        DrawRectangleRounded({ 20.0f, 20.0f, 200.0f, 120.0f }, 0.15f, 10, Fade(BLACK, 0.8f));
+        DrawRectangleRoundedLines({ 20.0f, 20.0f, 200.0f, 120.0f }, 0.15f, 10, GOLD);
+        DrawText("SCORE", 75, 35, 24, YELLOW);
+        DrawText(TextFormat("%d", score), 90, 70, 40, WHITE);
+
+        // Difficulty Display
+        DrawText("Difficulty:", 30, 110, 16, LIGHTGRAY);
+        string diffText = (difficulty == 1) ? "Easy" : (difficulty == 2) ? "Medium" : "Hard";
+        Color diffColor = (difficulty == 1) ? GREEN : (difficulty == 2) ? ORANGE : RED;
+        DrawText(diffText.c_str(), 120, 110, 16, diffColor);
+
+        // Draw Level 1 (3 cards) - THREE PEAKS
+        node* temp = array1.head;
+        int y = 160;
+        int index = 0;
+        int xPositions1[3] = { 300, 650, 1000 };
+        while (temp != nullptr) {
+            drawCard(temp->data, xPositions1[index], y, temp->revealed, temp->removed);
+            temp = temp->next;
+            index++;
+        }
+
+        // Draw Level 2 (6 cards)
+        temp = array2.head;
+        y = 300;
+        index = 0;
+        int xPositions2[6] = { 230, 350, 580, 700, 930, 1050 };
+        while (temp != nullptr) {
+            drawCard(temp->data, xPositions2[index], y, temp->revealed, temp->removed);
+            temp = temp->next;
+            index++;
+        }
+
+        // Draw Level 3 (9 cards)
+        temp = array3.head;
+        y = 440;
+        index = 0;
+        int xPositions3[9] = { 165, 285, 405, 525, 645, 765, 885, 1005, 1125 };
+        while (temp != nullptr) {
+            drawCard(temp->data, xPositions3[index], y, temp->revealed, temp->removed);
+            temp = temp->next;
+            index++;
+        }
+
+        // Draw Level 4 (10 cards) - BASE
+        temp = array4.head;
+        y = 580;
+        index = 0;
+        int xPositions4[10] = { 110, 230, 350, 470, 590, 710, 830, 950, 1070, 1190 };
+        while (temp != nullptr) {
+            drawCard(temp->data, xPositions4[index], y, temp->revealed, temp->removed);
+            temp = temp->next;
+            index++;
+        }
+
+        // Draw stock pile (face down) - Bottom left
+        if (stack1.head != nullptr) {
+            DrawRectangleRounded({ 120.0f, 750.0f, 90.0f, 120.0f }, 0.12f, 10, Color{ 30, 60, 140, 255 });
+            DrawRectangleRoundedLines({ 120.0f, 750.0f, 90.0f, 120.0f }, 0.12f, 10, Color{ 20, 40, 100, 255 });
+            DrawText("STOCK", 130, 795, 18, WHITE);
+        }
+        else {
+            DrawRectangleRounded({ 120.0f, 750.0f, 90.0f, 120.0f }, 0.12f, 10, Fade(DARKGREEN, 0.3f));
+            DrawRectangleRoundedLines({ 120.0f, 750.0f, 90.0f, 120.0f }, 0.12f, 10, Fade(WHITE, 0.2f));
+        }
+
+        // Draw waste pile (top card face up) - Next to stock
+        if (stack2.head != nullptr) {
+            temp = stack2.head;
+            while (temp->next != nullptr) {
+                temp = temp->next;
+            }
+            drawCard(temp->data, 250, 750, true, false);
+        }
+    }
+    void handleClick(int mouseX, int mouseY) {
+        // Handle stock pile click (new position)
+        if (mouseX >= 120 && mouseX <= 210 && mouseY >= 750 && mouseY <= 870) {
+            if (stack1.head != nullptr) {
+                node* temp = stack1.head;
+                stack1.head = stack1.head->next;
+                stack2.insertAtEnd(temp->data);
+                delete temp;
+            }
+            return;
+        }
+
+        // Level 4
+        node* temp = array4.head;
+        int xPositions4[10] = { 110, 230, 350, 470, 590, 710, 830, 950, 1070, 1190 };
+        int y = 580;
+        int index = 0;
+        while (temp != nullptr) {
+            if (mouseX >= xPositions4[index] && mouseX <= xPositions4[index] + 90 &&
+                mouseY >= y && mouseY <= y + 120) {
+                if (temp->revealed && !temp->removed) {
+                    input = temp->data;
+                    if (validateInput(input)) {
+                        temp->removed = true;
+                        score++;
+                        stack2.insertAtEnd(temp->data);
+                        reveal();
+                    }
+                }
+                return;
+            }
+            temp = temp->next;
+            index++;
+        }
+
+        // Level 3
+        temp = array3.head;
+        int xPositions3[9] = { 165, 285, 405, 525, 645, 765, 885, 1005, 1125 };
+        y = 440;
+        index = 0;
+        while (temp != nullptr) {
+            if (mouseX >= xPositions3[index] && mouseX <= xPositions3[index] + 90 &&
+                mouseY >= y && mouseY <= y + 120) {
+                if (temp->revealed && !temp->removed) {
+                    input = temp->data;
+                    if (validateInput(input)) {
+                        temp->removed = true;
+                        score++;
+                        stack2.insertAtEnd(temp->data);
+                        reveal();
+                    }
+                }
+                return;
+            }
+            temp = temp->next;
+            index++;
+        }
+
+        // Level 2
+        temp = array2.head;
+        int xPositions2[6] = { 230, 350, 580, 700, 930, 1050 };
+        y = 300;
+        index = 0;
+        while (temp != nullptr) {
+            if (mouseX >= xPositions2[index] && mouseX <= xPositions2[index] + 90 &&
+                mouseY >= y && mouseY <= y + 120) {
+                if (temp->revealed && !temp->removed) {
+                    input = temp->data;
+                    if (validateInput(input)) {
+                        temp->removed = true;
+                        score++;
+                        stack2.insertAtEnd(temp->data);
+                        reveal();
+                    }
+                }
+                return;
+            }
+            temp = temp->next;
+            index++;
+        }
+
+        // Level 1
+        temp = array1.head;
+        int xPositions1[3] = { 300, 650, 1000 };
+        y = 160;
+        index = 0;
+        while (temp != nullptr) {
+            if (mouseX >= xPositions1[index] && mouseX <= xPositions1[index] + 90 &&
+                mouseY >= y && mouseY <= y + 120) {
+                if (temp->revealed && !temp->removed) {
+                    input = temp->data;
+                    if (validateInput(input)) {
+                        temp->removed = true;
+                        score++;
+                        stack2.insertAtEnd(temp->data);
+                        reveal();
+                    }
+                }
+                return;
+            }
+            temp = temp->next;
+            index++;
+        }
+    }
+    void drawGameOver() {
+        DrawRectangle(0, 0, 1400, 900, Fade(BLACK, 0.85f));
+
+        if (gameWon) {
+            DrawText("YOU WIN!", 500, 300, 80, GOLD);
+            DrawText("Congratulations!", 520, 410, 35, WHITE);
+            DrawText(TextFormat("Final Score: %d", score), 550, 470, 30, YELLOW);
+        }
+        else {
+            DrawText("GAME OVER", 470, 300, 80, RED);
+            DrawText("No valid moves left!", 520, 410, 30, WHITE);
+            DrawText(TextFormat("Final Score: %d", score), 550, 460, 28, YELLOW);
+        }
+
+        DrawText("Press R to Restart or ESC to Quit", 460, 580, 26, RAYWHITE);
+    }
+
+};
+
+int main() {
+    // Initialize window with larger size (7 inches wide, 5 inches tall at 96 DPI ≈ 1400x900)
+    InitWindow(1400, 900, "TriPeaks Solitaire");
+    SetTargetFPS(60);
+
+    srand(time(0));
+    setup Setup;
+
+    // Main game loop
+    while (!WindowShouldClose()) {
+
+        // PHASE 1: Difficulty Selection
+        if (!Setup.difficultySelected) {
+            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                Vector2 mousePos = GetMousePosition();
+                Setup.handleDifficultyClick((int)mousePos.x, (int)mousePos.y);
+
+                // If difficulty was selected, initialize the game
+                if (Setup.difficultySelected) {
+                    Setup.shuffle();
+                    Setup.makeStacks();
+                    Setup.makeLevels();
+                    Setup.initializeLevels();
+                    Setup.initializeChildren();
+                    Setup.makeLevel4Reveal();
+                    Setup.stack2Reveal();
+                }
+            }
+
+            // Draw difficulty selection screen
+            BeginDrawing();
+            Setup.drawDifficultyScreen();
+            EndDrawing();
+        }
+
+        // PHASE 2: Game Play
+        else if (!Setup.gameOver) {
+            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                Vector2 mousePos = GetMousePosition();
+                Setup.handleClick((int)mousePos.x, (int)mousePos.y);
+                Setup.stack2Reveal();
+
+                // Check win condition
+                if (Setup.checkWin()) {
+                    Setup.gameOver = true;
+                    Setup.gameWon = true;
+                }
+                // Check lose condition
+                else if (!Setup.validMove()) {
+                    Setup.gameOver = true;
+                    Setup.gameWon = false;
+                }
+            }
+
+            // Draw game
+            BeginDrawing();
+            Setup.drawGame();
+            EndDrawing();
+        }
+
+        // PHASE 3: Game Over
+        else {
+            if (IsKeyPressed(KEY_R)) {
+                // Restart game - go back to difficulty selection
+                Setup = setup();
+                Setup.difficultySelected = false;
+                Setup.gameOver = false;
+                Setup.gameWon = false;
+                Setup.score = 0;
+            }
+
+            // Draw game with game over overlay
+            BeginDrawing();
+            Setup.drawGame();
+            Setup.drawGameOver();
+            EndDrawing();
+        }
+    }
+
+    CloseWindow();
+    return 0;
+=======
+     if(stack2.head==nullptr){
+        return false;
+    }
+    node* stk2Temp = stack2.head;
+    while(stk2Temp->next!=nullptr){
+        stk2Temp=stk2Temp->next;
+    }
+    string t=stk2Temp->data;
+    char stkSecond= t[1];
+
+    node* temp = array1.head;
+    while(temp!=nullptr){
+        if(temp->revealed&&!temp->removed){
+            char cardSecond=temp->data[1];
+            if(isValid(cardSecond,stkSecond)){
+                return true;
+            }
+        }
+        temp=temp->next;
+    }
+    temp=array2.head;
+    while(temp!=nullptr){
+        if(temp->revealed&&!temp->removed){
+            char cardSecond=temp->data[1];
+            if(isValid(cardSecond,stkSecond)){
+                return true;
+            }
+        }
+        temp=temp->next;
+    }
+    temp=array3.head;
+    while(temp!=nullptr){
+        if(temp->revealed&&!temp->removed){
+            char cardSecond=temp->data[1];
+            if(isValid(cardSecond,stkSecond)){
+                return true;
+            }
+        }
+        temp=temp->next;
+    }
+    temp=array4.head;
+    while(temp!=nullptr){
+        if(temp->revealed&&!temp->removed){
+            char cardSecond=temp->data[1];
+            if(isValid(cardSecond,stkSecond)){
+                return true;
+            }
+        }
+        temp=temp->next;
+    }
+    return false;
+}
+bool isValid(char card,char stack){
+    if(card>='2'&&card<='9'){
+        int cardVal=card-'0';
+        if(stack>='2'&&stack<='9'){
+            int stackVal=stack-'0';
+            if(cardVal==stackVal+1||cardVal==stackVal-1){
+                return true;
+            }
+        }else if(stack=='A'){
+            if(cardVal==2){
+                return true;
+            }
+        }else if(stack=='T'){
+            if(cardVal==9){
+                return true;
+            }
+        }
+    }else if(card=='A'){
+        if(stack=='2'||stack=='K'){
+            return true;
+        }
+    }else if(card=='T'){
+        if(stack=='9'||stack=='J'){
+            return true;
+        }
+    }else if(card=='J'){
+        if(stack=='T'||stack=='Q'){
+            return true;
+        }
+    }else if(card=='Q'){
+        if(stack=='J'||stack=='K'){
+            return true;
+        }
+    }else if(card=='K'){
+        if(stack=='Q'||stack=='A'){
+            return true;
+        }
+    }
+    return false;
+}
+    void takeInput() {
+    cout << "Enter a card name: ";
+    cin >> input;
+
+    if (input == "99") {
+        if (stack1.head != nullptr) {
+            node* temp = stack1.head;
+            stack1.head = stack1.head->next;
+            stack2.insertAtEnd(temp->data);
+            delete temp;
+        } else {
+            cout << "No more cards in stock!" << endl;
+        }
+        cout << endl;
+        return;         // only return in the 99 case
+    }
+
+    validateInput(input);
+
+    node* temp = array1.head;
+    while (temp != nullptr) {
+        if (temp->revealed && !temp->removed && input == temp->data) {
+            temp->removed = true;
+            stack2.insertAtEnd(temp->data);
+            reveal();
+        }
+        temp = temp->next;
+    }
+
+    temp = array2.head;
+    while (temp != nullptr) {
+        if (temp->revealed && !temp->removed && input == temp->data) {
+            temp->removed = true;
+            stack2.insertAtEnd(temp->data);
+            reveal();
+        }
+        temp = temp->next;
+    }
+
+    temp = array3.head;
+    while (temp != nullptr) {
+        if (temp->revealed && !temp->removed && input == temp->data) {
+            temp->removed = true;
+            stack2.insertAtEnd(temp->data);
+            reveal();
+        }
+        temp = temp->next;
+    }
+
+    temp = array4.head;
+    while (temp != nullptr) {
+        if (temp->revealed && !temp->removed && input == temp->data) {
+            temp->removed = true;
+            stack2.insertAtEnd(temp->data);
+            reveal();
+        }
+        temp = temp->next;
+    }
+}
+};
+
+
+int main(){
+    int swidth=1000;
+    int slenght=900;
+     InitWindow(swidth, slenght, "TriPeaks - Raylib Window");
+     SetTargetFPS(60);
+/*char ch = 219; // The solid block*/
+
+    cout<<"================================================================"<<endl;
+    cout<<"=========================TRIPEAKS==============================="<<endl;
+    cout<<"================================================================"<<endl;
+    cout<<endl;
+    cout<<"                    ~~ HOW TO PLAY ~~                      "<<endl;
+    cout<<endl;
+    cout<<"  OBJECTIVE: Clear all cards from the three peaks!         "<<endl;
+    cout<<endl;
+    cout<<"  RULES:                                                    "<<endl;
+    cout<<"  • Select cards that are ONE rank higher or lower         "<<endl;
+    cout<<"    than the top card of the waste pile                    "<<endl;
+    cout<<"  • Example: If waste pile shows 7, you can play 6 or 8    "<<endl;
+    cout<<"  • Kings (K) wrap with Aces (A) and Queens (Q)            "<<endl;
+    cout<<"  • Aces (A) wrap with Kings (K) and Twos (2)              "<<endl;
+    cout<<endl;
+    cout<<"  COMMANDS:                                                 "<<endl;
+    cout<<"  • Enter card name (e.g., SA, H7, DK) to play a card      "<<endl;
+    cout<<"  • Enter 99 to draw a new card from the stock pile        "<<endl;
+    cout<<endl;
+    cout<<"  SYMBOLS:                                                  "<<endl;
+    cout<<"  • ** = Hidden card (not yet playable)                    "<<endl;
+    cout<<"  • __ = Removed card (already played)                     "<<endl;
+    cout<<"  • Card codes: S=Spades, H=Hearts, D=Diamonds, C=Clubs    "<<endl;
+    cout<<"  • Ranks: A,2-9,T(10),J,Q,K                               "<<endl;
+    cout<<endl;
+    cout<<"============================================================"<<endl;
+    cout<<endl;
+    cout<<"            Press ENTER to start the game...               "<<endl;
+    cin.get();
+    cout<<endl;
+
+    srand(time(0));
+    setup Setup;
+    Setup.shuffle();
+    Setup.makeStacks();
+    Setup.makeLevels();
+    Setup.initializeLevels();
+    Setup.initializeChildren();
+    Setup.makeLevel4Reveal();
+    Setup.stack2Reveal();
+    Setup.displayGame();
+    while (!WindowShouldClose())
+    {
+        if (Setup.validMove())
+        {Setup.displayGame();
+        Setup.takeInput();
+    Setup.reveal();
+Setup.stack2Reveal();
+}
+else 
+{ cout<<"NO valid moves left! Game over, "<<endl;
+cout<<"Press ENTER to exit..."<<endl;
+cin.ignore(numeric_limits<streamsize> ::max(), '\n');
+break;
+    }
+    BeginDrawing();
+    ClearBackground (WHITE);
+    Drawtext("Tipeaks Game", 40, 40, 20, RAYWHITE);
+    EndDrawing();
+}
+CLoseWindow();
+return 0;
+>>>>>>> 8af33081e5bfd17d20eab1ad0be782c1f9f9915a
+}
+>>>>>>> main
