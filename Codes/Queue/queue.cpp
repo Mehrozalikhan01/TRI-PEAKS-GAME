@@ -397,25 +397,28 @@ incstock(num,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11);
 incstock(num,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11);
         }
         else{
-        cout<<"This card cant be addon to the stack \n";}
-    }
- else { cout<<"This card doesnot exist \n";}
+        cout<<"This card cant be addon to the stack... \n";}
+    }}
+ else { cout<<"This card doesnot exist... \n";}
 
-    }
     
+
 }
 
-void chkwin(queue<string> &q1,queue<string> &q2,queue<string> &q3,queue<string> &q4,queue<string> &q5,queue<string> &q6,queue<string> &q7,queue<string> &q8,queue<string> &q9,queue<string> &q10,queue<string> &q11){
+bool chkwin(queue<string> &q1,queue<string> &q2,queue<string> &q3,queue<string> &q4,queue<string> &q5,queue<string> &q6,queue<string> &q7,queue<string> &q8,queue<string> &q9,queue<string> &q10,queue<string> &q11){
     if(q1.empty() && q2.empty() && q3.empty() && q4.empty() && q5.empty() && q6.empty() && q7.empty() && q8.empty() && q9.empty() && q10.empty() ){
 cout<<"YOU WIN! \n";
   cout<<"(Redirecting  back to main menu.....)";
   Sleep(3000);
-return;}
+return false;}
 else if(q11.empty()){
     cout<<"YOUR LOSE! \n";
     cout<<"(Redirecting  back to main menu.....)";
     Sleep(3000);
-    return;}
+    return false;}
+    else{
+        return true;
+    }
 }
 
 void saving(queue<string> &q1,queue<string> &q2,queue<string> &q3,queue<string> &q4,queue<string> &q5,queue<string> &q6,queue<string> &q7,queue<string> &q8,queue<string> &q9,queue<string> &q10,queue<string> &q11){
@@ -510,14 +513,13 @@ else{
     else if(input==2){
         loading(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11); }
         else{exit(0);}
-
-
-    while((!q1.empty() && !q2.empty() && !q3.empty() && !q4.empty() && !q5.empty() && !q6.empty() && !q7.empty() && !q8.empty() && !q9.empty() && !q10.empty()) || (!q11.empty())){
+bool active=true;
+    while(active){
     system("cls");
         display(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11);
     inputing(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11);
     saving(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11);
-    chkwin(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11);
+    active=chkwin(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11);
     Sleep(1000);
 }
    }
